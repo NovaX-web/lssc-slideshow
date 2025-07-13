@@ -3,214 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LSSC National Celebration Slideshow</title>
+  <title>LSSC Slideshow</title>
   <style>
     body {
-      margin: 0; padding: 0;
-      background-color: #000; color: #fff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       height: 100vh;
       text-align: center;
-      padding: 2rem;
-      overflow: hidden;
     }
     #slide-text {
-      white-space: pre-wrap;
-      font-size: 1.3rem;
-      max-width: 90vw;
-      max-height: 80vh;
-      overflow-y: auto;
-      margin-bottom: 1rem;
+      padding: 2rem;
+      font-size: 1.5rem;
+      max-width: 800px;
+      line-height: 1.5;
     }
-    #controls {
-      margin-top: 0.5rem;
-    }
-    button {
+    #start-btn {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       padding: 0.5rem 1rem;
       font-size: 1rem;
-      background: #222;
+      background: #fff;
+      color: #000;
       border: none;
       border-radius: 5px;
-      color: white;
       cursor: pointer;
-    }
-    button:hover {
-      background: #444;
     }
   </style>
 </head>
 <body>
+  <button id="start-btn">Start Slideshow</button>
+  <div id="slide-text">Click "Start Slideshow" to begin.</div>
 
-<div id="slide-text"></div>
-
-<div id="controls">
-  <button id="mute-btn">🔈 Mute</button>
-</div>
-
-<script>
-const slides = [
-  `🎉 What exactly can you get from this epic 6-day event? It all comes down to 4 major benefits:
-
-1⃣ Upgrade your device, and the system will instantly give you a higher-level device — FREE for 365 days!
-👉 Your income doubles immediately, withdrawals become fee-free, and you also get lucky draw chances (up to 10 times)!`,
-
-  `2⃣ Upgrade your device or invite new users — and you'll earn lucky draw entries!
-👉 Each draw gives you 2 gift fragments, which can be redeemed for amazing prizes like:
-iPhone 16, LV bag, Mercedes, Tesla, global travel — your choice, your reward!`,
-
-  `3⃣ Enjoy permanent benefits — completely free!
-👉 Lifetime zero withdrawal fees
-👉 Weekend earnings enabled
-👉 Instant withdrawals with no approval needed`,
-
-  `4⃣ New users also enjoy the same rewards, and the referrer gets extra draw chances!
-👉 Earn together, draw together, win big together!
-
-🎥 LSSC Dallas Headquarters Operation Preview, Mbappé and a lineup of celebrities will be there to support
-
-📍 On July 25th, we’ll be waiting for you in Dallas`,
-
-  `🎉 LSSC National Celebration for 6 Days, Benefits Non-Stop 🎉
-
-During the event, upgrade your device = Get a free device + Win luxurious prizes through lucky draws + Lifetime withdrawal fee exemption + Weekend device benefits!`,
-
-  `📅 Event Dates: July 11th - July 16th (Only 5 days left!)
-
-The only thing you need to do now: Upgrade your device! Contact your manager to apply for the rewards now!`,
-
-  `For example: Upgrade to A3
-➤ Get a higher-level S1 device for free (use it for 365 days, double the earnings)
-➤ Receive 3 lucky draw chances (at least 6 fragments, 100% guaranteed iPhone 16)
-➤ Lifetime withdrawal fee exemption, with qualification to operate devices on weekends!`,
-
-  `🔹 Upgrading to S1, S2, or SSS rewards even more, up to 10 lucky draw chances, double earnings every day!
-
-🎁 Lucky draw always rewards fragments, which can be exchanged for a variety of prizes!
-
-iPhone 16, 10 fragments, MacBook Air, Tesla, Mercedes G63
-Also LV bags, 65-inch TVs, 7-day family trip to Hawaii,`,
-
-  `📌 Example:
-If you upgrade to A3 now, you'll immediately receive an S1 device worth 23,000 yuan to use for a year, along with 3 lucky draws, 100% guaranteed to win an iPhone or MacBook.
-
-Upgrading your device now = Get a higher-level device for free + Win prizes + Lifetime withdrawal benefits
-Once upgraded, let me know, and I’ll guide you step by step on how to claim all your rewards, ensuring you make a profit without loss!`,
-
-  `📢 During the National Celebration Event, Free Tasks Are Now Live:
-
-✅ 1. Share the message I sent above (with the link) to LSSC members and receive a reward!
-✅ 2. Stay active and check in with me for 5 days during the event, and you’ll receive a brand new iPhone 16!
-✅ 3. Record a video explaining the event and post it in the WhatsApp community group — you’ll instantly receive a $200 reward!`,
-
-  `🎉 [LSSC National Celebration – 6-Day Event Is Live!]
-Upgrade your device now and get a higher-level device for FREE + prize draw entries + lifetime withdrawal fee waivers!
-⏳ Only 5 days left!
-
-👉 Event Period: July 11 – July 16 (Eastern Time)`,
-
-  `📢 Event Highlights:
-Upgrade your scooter device now and the system will automatically upgrade you one level higher for free!
-You'll also receive prize draw entries and permanent withdrawal fee waivers!
-
-No matter your current level, once you upgrade, you’ll enjoy these benefits:`,
-
-  `🔹 Upgrade to A1: Get a free A2 device valid for 150 days
-🔹 Upgrade to A2: Get a free A3 device valid for 365 days
-🔹 Upgrade to A3: Get a free S1 device valid for 365 days
-🔹 Upgrade to S1: Get a free S2 device valid for 365 days
-🔹 Upgrade to S2: Get a free SSS device valid for 365 days
-🔹 Upgrade to SSS: Earn double daily income with device valid for 150 days`,
-
-  `📌 Upgrade to A3 or above to enjoy:
-✔️ Lifetime zero withdrawal fees
-✔️ Weekend device activation
-✔️ No review required for withdrawals!`,
-
-  `🌟 New to LSSC? Join now and enjoy this limited-time celebration bonus!
-
-🔸 Join at B3 ($900 – save $60): Get free A1 device for 50 days
-🔸 Join at A1 ($2,000 – save $180): Get free A2 device for 150 days
-🔸 Join at A2 ($4,500 – save $480): Get free A3 device for 365 days
-🔸 Join at A3 ($10,000 – save $700): Get free S1 device for 365 days
-🔸 Join at S1 ($20,000 – save $3,000): Get free S2 device for 365 days
-🔸 Join at S2 ($40,000 – save $10,000): Get free SSS device for 365 days
-🔸 Join at SSS ($100,000 – save $25,000): Get double daily income with device valid for 150 days`,
-
-  `📌 New members joining at A3 or above also get:
-✔️ Lifetime zero withdrawal fees
-✔️ Weekend device activation
-✔️ No withdrawal review needed`,
-
-  `🔥 What you need to do now:
-Pay the difference and upgrade immediately!
-Then message me — I’ll guide you step-by-step on claiming your rewards and entering the grand prize draw!
-
-💯 I’ll make sure you’re on the path to WINNING A CAR!
-
-🔗 Learn more: https://lsscactivity.com/
-Questions? Message the Problem Solving Team.`
-];
-
-// UI elements
-const slideText = document.getElementById("slide-text");
-const muteBtn = document.getElementById("mute-btn");
-
-let isMuted = false;
-const synth = window.speechSynthesis;
-let currentSlide = 0;
-
-function removeEmojis(text) {
-  // Unicode emoji range filtering - keep letters, numbers, punctuation, spaces
-  return text.replace(/[^\p{L}\p{N}\p{P}\p{Z}]/gu, '');
-}
-
-function speakSlide(text) {
-  if (synth.speaking) synth.cancel();
-
-  const cleanText = removeEmojis(text);
-  const utterance = new SpeechSynthesisUtterance(cleanText);
-  utterance.rate = 1;
-  utterance.volume = 1;
-
-  utterance.onend = () => {
-    nextSlide();
-  };
-
-  if (!isMuted) synth.speak(utterance);
-  else {
-    // If muted, auto advance after estimated reading time (~0.06s per char)
-    let estTime = cleanText.length * 60;
-    setTimeout(nextSlide, estTime);
-  }
-}
-
-function showSlide(index) {
-  if (index >= slides.length) index = 0;
-  currentSlide = index;
-  slideText.textContent = slides[currentSlide];
-  speakSlide(slides[currentSlide]);
-}
-
-function nextSlide() {
-  showSlide(currentSlide + 1);
-}
-
-muteBtn.addEventListener("click", () => {
-  isMuted = !isMuted;
-  muteBtn.textContent = isMuted ? "🔇 Muted" : "🔈 Mute";
-  synth.cancel();
-});
-
-// Start the slideshow
-showSlide(0);
-</script>
-
+  <script src="slideshow.js"></script>
 </body>
 </html>
+
 
 
 
